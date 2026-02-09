@@ -549,6 +549,317 @@ function ReasonsSection() {
   );
 }
 
+/* ── Dreamy Aesthetic Section ───────────────────────────── */
+const AESTHETIC_IMAGES = [
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/e0f7f091b656303e2f59ac933873fb11-1770669165773.jpg?width=8000&height=8000&resize=contain",
+    caption: "here & now",
+    aspect: "aspect-square",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/ef3d252edc62678e2038a10d034344bd-1770669165531.jpg?width=8000&height=8000&resize=contain",
+    caption: "golden hour",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/e8a28e52942cfd7e701e41728254b5d8-1770669165690.jpg?width=8000&height=8000&resize=contain",
+    caption: "cosmic love",
+    aspect: "aspect-square",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/d05095ba3c18c7500bf510152bd537e3-1770669165532.jpg?width=8000&height=8000&resize=contain",
+    caption: "moonlit nights",
+    aspect: "aspect-[4/3]",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/4c89fc5d95a1e21c1efad5330bd691d7-1770669165699.jpg?width=8000&height=8000&resize=contain",
+    caption: "reaching for you",
+    aspect: "aspect-[16/9]",
+  },
+];
+
+function DreamyAestheticSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <section ref={ref} className="py-24 px-6 relative overflow-hidden">
+      <TwinklingStars count={15} />
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16 relative z-10"
+      >
+        <p className="text-white/20 text-xs tracking-[0.4em] uppercase mb-4">
+          vibes
+        </p>
+        <h2 className="text-3xl md:text-5xl font-serif font-light text-white tracking-tight">
+          Us in Another Universe
+        </h2>
+        <p className="text-white/25 text-sm font-light mt-3 tracking-wide">
+          where every star tells our story
+        </p>
+        <div className="w-12 h-px bg-white/15 mx-auto mt-6" />
+      </motion.div>
+
+      {/* Masonry-style grid */}
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Top row: 2 images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          {AESTHETIC_IMAGES.slice(0, 2).map((img, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15, duration: 0.8 }}
+              className="relative group"
+            >
+              <div
+                className={`relative ${img.aspect} w-full overflow-hidden rounded-sm border border-white/[0.06]`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.caption}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-white/40 text-xs tracking-[0.2em] font-light italic">
+                    {img.caption}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Middle: Full-width feature image */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="relative group mb-4"
+        >
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-white/[0.06]">
+            <Image
+              src={AESTHETIC_IMAGES[2].src}
+              alt={AESTHETIC_IMAGES[2].caption}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+              <p className="text-white/40 text-sm tracking-[0.3em] font-light italic">
+                {AESTHETIC_IMAGES[2].caption}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Bottom row: 2 images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {AESTHETIC_IMAGES.slice(3).map((img, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.45 + i * 0.15, duration: 0.8 }}
+              className="relative group"
+            >
+              <div
+                className={`relative ${img.aspect} w-full overflow-hidden rounded-sm border border-white/[0.06]`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.caption}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-white/40 text-xs tracking-[0.2em] font-light italic">
+                    {img.caption}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Dreamy Aesthetic Section 2 ─────────────────────────── */
+const AESTHETIC_IMAGES_2 = [
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/83a7565a76ed3737a838168cbf198da5-1770669576851.jpg?width=8000&height=8000&resize=contain",
+    caption: "city of stars",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/e8e8965770ea58a2ddcf27944a6b1ed9-1770669576846.jpg?width=8000&height=8000&resize=contain",
+    caption: "your eyes",
+    aspect: "aspect-square",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/0d2248af7c2193f6e1142ef032495117-1770669576846.jpg?width=8000&height=8000&resize=contain",
+    caption: "i love the moon... me too",
+    aspect: "aspect-square",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/b9a1321cbf8df08ed1bd20df8f3e1c2b-1770669576916.jpg?width=8000&height=8000&resize=contain",
+    caption: "through the lens",
+    aspect: "aspect-[4/3]",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/dbc9b511-ba2a-42e2-a306-73fbbdfb69cf/28d19f09fa83aaabad13a09bbb086ed9-1770669576848.jpg?width=8000&height=8000&resize=contain",
+    caption: "into the horizon",
+    aspect: "aspect-square",
+  },
+];
+
+function DreamyAestheticSection2() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <section ref={ref} className="py-24 px-6 relative overflow-hidden">
+      <TwinklingStars count={12} />
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16 relative z-10"
+      >
+        <p className="text-white/20 text-xs tracking-[0.4em] uppercase mb-4">
+          moments
+        </p>
+        <h2 className="text-3xl md:text-5xl font-serif font-light text-white tracking-tight">
+          Stolen Glimpses
+        </h2>
+        <p className="text-white/25 text-sm font-light mt-3 tracking-wide">
+          frames that feel like us
+        </p>
+        <div className="w-12 h-px bg-white/15 mx-auto mt-6" />
+      </motion.div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Top: tall portrait left + square right */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0, duration: 0.8 }}
+            className="relative group md:col-span-2"
+          >
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm border border-white/[0.06]">
+              <Image
+                src={AESTHETIC_IMAGES_2[0].src}
+                alt={AESTHETIC_IMAGES_2[0].caption}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="text-white/40 text-xs tracking-[0.2em] font-light italic">
+                  {AESTHETIC_IMAGES_2[0].caption}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.15, duration: 0.8 }}
+            className="relative group md:col-span-3"
+          >
+            <div className="relative aspect-[3/4] md:aspect-auto md:h-full w-full overflow-hidden rounded-sm border border-white/[0.06]">
+              <Image
+                src={AESTHETIC_IMAGES_2[1].src}
+                alt={AESTHETIC_IMAGES_2[1].caption}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="text-white/40 text-xs tracking-[0.2em] font-light italic">
+                  {AESTHETIC_IMAGES_2[1].caption}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Middle: full-width */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="relative group mb-4"
+        >
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-white/[0.06]">
+            <Image
+              src={AESTHETIC_IMAGES_2[2].src}
+              alt={AESTHETIC_IMAGES_2[2].caption}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+              <p className="text-white/40 text-sm tracking-[0.3em] font-light italic">
+                {AESTHETIC_IMAGES_2[2].caption}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Bottom row: 2 images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {AESTHETIC_IMAGES_2.slice(3).map((img, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.45 + i * 0.15, duration: 0.8 }}
+              className="relative group"
+            >
+              <div
+                className={`relative ${img.aspect} w-full overflow-hidden rounded-sm border border-white/[0.06]`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.caption}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-white/40 text-xs tracking-[0.2em] font-light italic">
+                    {img.caption}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Letter Section ─────────────────────────────────────── */
 function LetterSection() {
   const ref = useRef(null);
@@ -687,11 +998,15 @@ export default function Home() {
 
       <GallerySection />
 
-      <ReasonsSection />
+        <ReasonsSection />
 
-      <LetterSection />
+        <DreamyAestheticSection />
 
-      <FinalSection />
+          <LetterSection />
+
+          <DreamyAestheticSection2 />
+
+        <FinalSection />
 
       {/* Footer */}
       <div className="text-center py-12 text-white/10 text-xs font-light tracking-[0.2em]">
