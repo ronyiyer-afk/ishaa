@@ -860,6 +860,63 @@ function DreamyAestheticSection2() {
   );
 }
 
+/* ── Confession Q&A Section ─────────────────────────────── */
+function ConfessionSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const confessions = [
+    { q: "Does this website make any sense", a: "NO" },
+    { q: "Do I regret creating it", a: "NO" },
+    { q: "Do I love you", a: "hell yess" },
+    { q: "Do you love me", a: "IDK" },
+    { q: "Will I give up", a: "absolutely fucking not!!!!!" },
+  ];
+
+  return (
+    <section ref={ref} className="py-32 px-6 relative">
+      <div className="max-w-md mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <div className="w-12 h-px bg-white/15 mx-auto mb-8" />
+        </motion.div>
+
+        <div className="space-y-10">
+          {confessions.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.18, duration: 0.7, ease: "easeOut" }}
+              className="text-center"
+            >
+              <p className="text-white/30 text-sm font-light tracking-wide mb-2">
+                {item.q}
+              </p>
+              <p className={`font-serif italic tracking-wide ${
+                i === confessions.length - 1
+                  ? "text-white/80 text-2xl md:text-3xl font-normal"
+                  : i === 2
+                    ? "text-white/70 text-xl md:text-2xl"
+                    : "text-white/50 text-lg md:text-xl"
+              }`}>
+                — {item.a}
+              </p>
+              {i < confessions.length - 1 && (
+                <div className="w-6 h-px bg-white/10 mx-auto mt-8" />
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Letter Section ─────────────────────────────────────── */
 function LetterSection() {
   const ref = useRef(null);
@@ -1004,9 +1061,11 @@ export default function Home() {
 
           <LetterSection />
 
-          <DreamyAestheticSection2 />
+            <DreamyAestheticSection2 />
 
-        <FinalSection />
+          <ConfessionSection />
+
+          <FinalSection />
 
       {/* Footer */}
       <div className="text-center py-12 text-white/10 text-xs font-light tracking-[0.2em]">
