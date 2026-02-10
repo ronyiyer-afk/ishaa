@@ -11,14 +11,48 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
-const IMAGES = [
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.15-AM-1770662771522.jpeg?width=8000&height=8000&resize=contain",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1770662771524.jpeg?width=8000&height=8000&resize=contain",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2026-02-10-at-12.13.14-AM-1770662771636.jpeg?width=8000&height=8000&resize=contain",
-  "/uploads/ishaa-new.jpg",
-  "/uploads/ishaa-2.jpg",
-  "/uploads/ishaa-3.jpg",
-  "/uploads/ishaa-4.jpg",
+type ImageItem = {
+  src: string;
+  style: "classic" | "landscape";
+};
+
+const IMAGES: ImageItem[] = [
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.15-AM-1770662771522.jpeg?width=8000&height=8000&resize=contain",
+    style: "classic",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1770662771524.jpeg?width=8000&height=8000&resize=contain",
+    style: "classic",
+  },
+  {
+    src: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2026-02-10-at-12.13.14-AM-1770662771636.jpeg?width=8000&height=8000&resize=contain",
+    style: "classic",
+  },
+  {
+    src: "/uploads/ishaa-new.jpg",
+    style: "classic",
+  },
+  {
+    src: "/uploads/ishaa-2.jpg",
+    style: "landscape",
+  },
+  {
+    src: "/uploads/ishaa-3.jpg",
+    style: "landscape",
+  },
+  {
+    src: "/uploads/ishaa-4.jpg",
+    style: "landscape",
+  },
+  {
+    src: "/uploads/ishaa-5.jpg",
+    style: "landscape",
+  },
+  {
+    src: "/uploads/ishaa-6.jpg",
+    style: "classic",
+  },
 ];
 
 const LOVE_QUOTES = [
@@ -84,15 +118,15 @@ function BackgroundMusic() {
 
       {loaded && (
         <div
-          className="fixed -left-[9999px] top-0 w-[300px] h-[200px] opacity-0 pointer-events-none"
+          className="fixed bottom-0 right-0 w-px h-px overflow-hidden opacity-0 pointer-events-none"
           aria-hidden="true"
         >
           {playing && (
             <iframe
               ref={iframeRef}
-              src="https://www.youtube.com/embed/oVp6tu1-Xuc?autoplay=1&loop=1&playlist=oVp6tu1-Xuc&controls=0&showinfo=0&mute=0"
-              width="300"
-              height="200"
+              src="https://www.youtube.com/embed/oVp6tu1-Xuc?autoplay=1&loop=1&playlist=oVp6tu1-Xuc&controls=0&showinfo=0&mute=0&playsinline=1"
+              width="1"
+              height="1"
               allow="autoplay; encrypted-media"
               title="Background Music"
             />
@@ -259,7 +293,7 @@ function HeroSection() {
             style={{ scale: smoothScale }}
           >
             <Image
-              src={IMAGES[0]}
+              src={IMAGES[0].src}
               alt="Ishaa"
               fill
               className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -383,7 +417,7 @@ function MoonSection() {
           >
             <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_0_80px_20px_rgba(255,255,255,0.04)]">
               <Image
-                src={IMAGES[1]}
+                src={IMAGES[1].src}
                 alt="Ishaa"
                 fill
                 className="object-cover"
@@ -420,7 +454,7 @@ function MoonSection() {
 }
 
 /* ── Photo Card ─────────────────────────────────────────── */
-function PhotoCard({ src, index }: { src: string; index: number }) {
+function PhotoCard({ item, index }: { item: ImageItem; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const isEven = index % 2 === 0;
@@ -443,13 +477,13 @@ function PhotoCard({ src, index }: { src: string; index: number }) {
       >
         <div
           className={`relative rounded-sm overflow-hidden shadow-2xl shadow-black/60 border border-white/5 
-            ${index < 4 ? "w-64 h-80 md:w-72 md:h-96" : "w-80 h-60 md:w-[28rem] md:h-80 bg-black/40"}`}
+            ${item.style === "classic" ? "w-64 h-80 md:w-72 md:h-96" : "w-80 h-60 md:w-[28rem] md:h-80 bg-black/40"}`}
         >
           <Image
-            src={src}
+            src={item.src}
             alt="Ishaa"
             fill
-            className={`${index < 4 ? "object-cover" : "object-contain"} grayscale group-hover:grayscale-0 transition-all duration-700`}
+            className={`${item.style === "classic" ? "object-cover" : "object-contain"} grayscale group-hover:grayscale-0 transition-all duration-700`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
@@ -486,8 +520,8 @@ function GallerySection() {
       </motion.div>
 
       <div className="space-y-4 relative z-10">
-        {IMAGES.map((src, i) => (
-          <PhotoCard key={i} src={src} index={i} />
+        {IMAGES.map((item, i) => (
+          <PhotoCard key={i} item={item} index={i} />
         ))}
       </div>
     </section>
