@@ -15,7 +15,6 @@ const IMAGES = [
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.15-AM-1770662771522.jpeg?width=8000&height=8000&resize=contain",
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1770662771524.jpeg?width=8000&height=8000&resize=contain",
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2026-02-10-at-12.13.14-AM-1770662771636.jpeg?width=8000&height=8000&resize=contain",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1-1770662771590.jpeg?width=8000&height=8000&resize=contain",
   "/uploads/ishaa-new.jpg",
   "/uploads/ishaa-2.jpg",
   "/uploads/ishaa-3.jpg",
@@ -444,13 +443,13 @@ function PhotoCard({ src, index }: { src: string; index: number }) {
       >
         <div
           className={`relative rounded-sm overflow-hidden shadow-2xl shadow-black/60 border border-white/5 
-            ${index < 5 ? "w-64 h-80 md:w-72 md:h-96" : "w-80 h-60 md:w-[28rem] md:h-80 bg-black/40"}`}
+            ${index < 4 ? "w-64 h-80 md:w-72 md:h-96" : "w-80 h-60 md:w-[28rem] md:h-80 bg-black/40"}`}
         >
           <Image
             src={src}
             alt="Ishaa"
             fill
-            className={`${index < 5 ? "object-cover" : "object-contain"} grayscale group-hover:grayscale-0 transition-all duration-700`}
+            className={`${index < 4 ? "object-cover" : "object-contain"} grayscale group-hover:grayscale-0 transition-all duration-700`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
