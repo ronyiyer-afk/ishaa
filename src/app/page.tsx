@@ -16,6 +16,10 @@ const IMAGES = [
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1770662771524.jpeg?width=8000&height=8000&resize=contain",
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2026-02-10-at-12.13.14-AM-1770662771636.jpeg?width=8000&height=8000&resize=contain",
   "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/WhatsApp-Image-2026-02-10-at-12.13.14-AM-1-1770662771590.jpeg?width=8000&height=8000&resize=contain",
+  "/uploads/ishaa-new.jpg",
+  "/uploads/ishaa-2.jpg",
+  "/uploads/ishaa-3.jpg",
+  "/uploads/ishaa-4.jpg",
 ];
 
 const LOVE_QUOTES = [
@@ -278,7 +282,7 @@ function HeroSection() {
             Ishaa
           </h1>
           <p className="text-lg md:text-xl font-serif text-white/40 mt-2 tracking-wide">
-              For you Ishaaa :)
+            For you Ishaaa :)
           </p>
           <div className="w-12 h-px bg-white/20 mx-auto mt-4" />
           <p className="text-white/25 text-sm font-light mt-4 max-w-sm mx-auto tracking-wide">
@@ -393,24 +397,24 @@ function MoonSection() {
           </motion.div>
         </div>
 
-          {/* Comparison text */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="text-center mt-20"
-          >
-            <p className="text-white/40 text-lg md:text-xl font-serif italic font-light leading-relaxed max-w-md mx-auto">
-              The moon lights up the entire sky,
-              <br />
-              but you light up my entire universe.
-            </p>
-            <div className="w-8 h-px bg-white/15 mx-auto mt-8" />
-            <p className="text-white/20 text-sm font-light mt-4 tracking-wide">
-              and honestly, you&apos;re way prettier
-            </p>
-              <div className="w-8 h-px bg-white/15 mx-auto mt-8" />
-          </motion.div>
+        {/* Comparison text */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="text-center mt-20"
+        >
+          <p className="text-white/40 text-lg md:text-xl font-serif italic font-light leading-relaxed max-w-md mx-auto">
+            The moon lights up the entire sky,
+            <br />
+            but you light up my entire universe.
+          </p>
+          <div className="w-8 h-px bg-white/15 mx-auto mt-8" />
+          <p className="text-white/20 text-sm font-light mt-4 tracking-wide">
+            and honestly, you&apos;re way prettier
+          </p>
+          <div className="w-8 h-px bg-white/15 mx-auto mt-8" />
+        </motion.div>
       </div>
     </section>
   );
@@ -428,26 +432,28 @@ function PhotoCard({ src, index }: { src: string; index: number }) {
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease: "easeOut" }}
-      className={`flex items-center justify-center px-6 py-10 ${
-        isEven
-          ? "md:justify-start md:pl-[15%]"
-          : "md:justify-end md:pr-[15%]"
-      }`}
+      className={`flex items-center justify-center px-6 py-10 ${isEven
+        ? "md:justify-start md:pl-[15%]"
+        : "md:justify-end md:pr-[15%]"
+        }`}
     >
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300 }}
         className="relative group"
       >
-        <div className="relative w-64 h-80 md:w-72 md:h-96 rounded-sm overflow-hidden shadow-2xl shadow-black/60 border border-white/5">
+        <div
+          className={`relative rounded-sm overflow-hidden shadow-2xl shadow-black/60 border border-white/5 
+            ${index < 5 ? "w-64 h-80 md:w-72 md:h-96" : "w-80 h-60 md:w-[28rem] md:h-80 bg-black/40"}`}
+        >
           <Image
             src={src}
             alt="Ishaa"
             fill
-            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            sizes="320px"
+            className={`${index < 5 ? "object-cover" : "object-contain"} grayscale group-hover:grayscale-0 transition-all duration-700`}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
         </div>
       </motion.div>
     </motion.div>
@@ -897,13 +903,12 @@ function ConfessionSection() {
               <p className="text-white/30 text-sm font-light tracking-wide mb-2">
                 {item.q}
               </p>
-              <p className={`font-serif italic tracking-wide ${
-                i === confessions.length - 1
-                  ? "text-white/80 text-2xl md:text-3xl font-normal"
-                  : i === 2
-                    ? "text-white/70 text-xl md:text-2xl"
-                    : "text-white/50 text-lg md:text-xl"
-              }`}>
+              <p className={`font-serif italic tracking-wide ${i === confessions.length - 1
+                ? "text-white/80 text-2xl md:text-3xl font-normal"
+                : i === 2
+                  ? "text-white/70 text-xl md:text-2xl"
+                  : "text-white/50 text-lg md:text-xl"
+                }`}>
                 — {item.a}
               </p>
               {i < confessions.length - 1 && (
@@ -948,14 +953,14 @@ function LetterSection() {
               You probably don&apos;t even realize how amazing you are, Ishita,
               but I see it &mdash; in every little thing you do.
             </p>
-              <p>
-                I might not be the perfect one for you and made a lot of
-                mistakes earlier, but I still haven&apos;t forgot the memories
-                we have shared together. I really love you and always will.
-              </p>
-              <p className="text-white/60 italic pt-4 border-t border-white/[0.06]">
-                You&apos;re the most beautiful soul I&apos;ve ever known, my Golu.
-              </p>
+            <p>
+              I might not be the perfect one for you and made a lot of
+              mistakes earlier, but I still haven&apos;t forgot the memories
+              we have shared together. I really love you and always will.
+            </p>
+            <p className="text-white/60 italic pt-4 border-t border-white/[0.06]">
+              You&apos;re the most beautiful soul I&apos;ve ever known, my Golu.
+            </p>
           </div>
         </div>
       </motion.div>
@@ -1055,17 +1060,17 @@ export default function Home() {
 
       <GallerySection />
 
-        <ReasonsSection />
+      <ReasonsSection />
 
-        <DreamyAestheticSection />
+      <DreamyAestheticSection />
 
-          <LetterSection />
+      <LetterSection />
 
-            <DreamyAestheticSection2 />
+      <DreamyAestheticSection2 />
 
-          <ConfessionSection />
+      <ConfessionSection />
 
-          <FinalSection />
+      <FinalSection />
 
       {/* Footer */}
       <div className="text-center py-12 text-white/10 text-xs font-light tracking-[0.2em]">
